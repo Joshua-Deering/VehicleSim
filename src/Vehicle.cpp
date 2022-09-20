@@ -29,6 +29,6 @@ void Vehicle::tick(double dTime) {
 	speed += acceleration * dTime;
 	position += speed * dTime;
 
-	loadFront = (cgDistBack / length) * mass - (cgHeight / length) * mass * acceleration;
-	loadBack = (cgDistFront / length) * mass - (cgHeight / length) * mass * acceleration;
+	loadFront = (cgDistBack / length) * mass - (cgHeight / length) * (mass * acceleration);
+	loadBack = (cgDistFront / length) * mass + (cgHeight / length) * (mass * acceleration);
 }
