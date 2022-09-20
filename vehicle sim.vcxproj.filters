@@ -15,15 +15,15 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="vehicle sim.cpp">
+    <ClCompile Include="src\vehicle sim.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Vehicle.cpp">
+    <ClCompile Include="src\Vehicle.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vehicle.h">
+    <ClInclude Include="headers\Vehicle.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

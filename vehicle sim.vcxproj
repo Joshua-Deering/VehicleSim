@@ -134,11 +134,11 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="vehicle sim.cpp" />
-    <ClCompile Include="Vehicle.cpp" />
+    <ClCompile Include="src\vehicle sim.cpp" />
+    <ClCompile Include="src\Vehicle.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Vehicle.h" />
+    <ClInclude Include="headers\Vehicle.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
