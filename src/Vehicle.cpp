@@ -32,3 +32,14 @@ void Vehicle::tick(double dTime) {
 	loadFront = (cgDistBack / length) * mass - (cgHeight / length) * (mass * acceleration);
 	loadBack = (cgDistFront / length) * mass + (cgHeight / length) * (mass * acceleration);
 }
+
+double Vehicle::getEngineTorque(int rpm) {
+	if (rpm < peakRpm) {
+		double m = (torquePeak - torqueIdle) / (peakRpm - idleRpm);
+		return (rpm * m) + torqueIdle;
+	}
+	else {
+		double m = (torqueRedline - torquePeak) / (redLineRpm - peakRpm);
+		return (rpm * m) + torqueIdle;
+	}
+}
