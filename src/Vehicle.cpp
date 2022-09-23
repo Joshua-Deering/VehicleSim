@@ -1,10 +1,10 @@
 #include "../headers/Vehicle.h"
 #include <iostream>
-Vehicle::Vehicle(double _drag, double _rr, int _mass, double _enginePower) {
+Vehicle::Vehicle(double _drag, double _rr, int _mass) {
 	drag = _drag;
 	rr = _rr;
+	enginePower = 0;
 	mass = _mass;
-	enginePower = _enginePower;
 	position = 0;
 	speed = 0;
 
@@ -13,11 +13,15 @@ Vehicle::Vehicle(double _drag, double _rr, int _mass, double _enginePower) {
 	cgDistFront = length / 2;
 	cgDistBack = length / 2;
 	cgHeight = 45;
+	acceleration = 0;
+	loadFront = 0;
+	loadBack = 0;
+	wheelRadius = 0.33;
+	wheelSpeed = 0;
 }
 
-double Vehicle::calcAcceleration(double throttle) {
-	//may or may not make this into an actual thing so the tires have an effect
-	double traction = enginePower * throttle;
+double Vehicle::calcAcceleration() {
+	double traction = enginePower;
 	double d = drag * (speed * (speed/2));
 	double r = rr * speed;
 
@@ -25,7 +29,11 @@ double Vehicle::calcAcceleration(double throttle) {
 }
 
 void Vehicle::tick(double dTime) {
-	acceleration = calcAcceleration(1);
+	wheelSpeed = speed / wheelRadius;
+	engine.getRpm(wheelSpeed);
+	enginePower = engine.getTorque(1);
+
+	acceleration = calcAcceleration();
 	speed += acceleration * dTime;
 	position += speed * dTime;
 

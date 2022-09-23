@@ -1,5 +1,5 @@
 #pragma once
-#include "Engine.h"
+#include "../headers/Engine.h"
 class Vehicle
 {
 public:
@@ -23,9 +23,12 @@ public:
 	double loadFront;
 	double loadBack;
 
+	double wheelRadius;
+	double wheelSpeed;
+
 	Engine engine;
 
-	Vehicle(double drag, double rollingResistance, int mass, double enginePower);
-	double calcAcceleration(double throttle);
+	Vehicle(double drag, double rollingResistance, int mass);
+	double calcAcceleration();
 	void tick(double dTime);
 };

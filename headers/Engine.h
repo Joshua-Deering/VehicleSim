@@ -1,22 +1,29 @@
 #pragma once
+#define _USE_MATH_DEFINES
+#include <cmath>
+#include <algorithm>
 class Engine
 {
 public:
-	int torquePeak = 475;
-	int peakRpm = 4250;
-	int torqueRedline = 400;
-	int redLineRpm = 6000;
-	int torqueIdle = 400;
-	int idleRpm = 1000;
+	int torquePeak;
+	int peakRpm;
+	int torqueRedline;
+	int redLineRpm;
+	int torqueIdle;
+	int idleRpm;
 
 	double diffRatio;
 	double gearRatios[7];
-	int currentGear = 1;
-	double transmissionEff = 0.7;
+	int currentGear;
+	double transmissionEff;
+
+	double currentTorque;
+	int currentRpm;
 
 	Engine();
 
-	double getTorque(int rpm);
-	double getRpm();
+	double getTorque(double throttle);
+	double getHp(double throttle);
+	double getRpm(double wheelSpeed);
 };
 
