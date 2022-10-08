@@ -40,3 +40,34 @@ void Vehicle::tick(double dTime) {
 	loadFront = (cgDistBack / length) * mass - (cgHeight / length) * (mass * acceleration);
 	loadBack = (cgDistFront / length) * mass + (cgHeight / length) * (mass * acceleration);
 }
+
+/*
+double drag;
+	double rr;
+	double enginePower;
+
+	double position;
+	double speed;
+	double acceleration;
+
+	double length;
+
+	double cgDistFront;
+	double cgDistBack;
+	double cgHeight;
+
+	int mass;
+	double loadFront;
+	double loadBack;
+
+	double wheelRadius;
+	double wheelSpeed;
+*/
+
+void Vehicle::showStats(SDL_Renderer *renderer, TTF_Font *font, int x, int y)
+{
+	SDL_Color color = SDL_Color(0, 0, 0);
+	helper::renderText(renderer, font, color, helper::formatString(position, "m"), x, y);
+	helper::renderText(renderer, font, color, helper::formatString(speed, "m/s"), x, y + 16);
+	helper::renderText(renderer, font, color, helper::formatString(acceleration, "m/s2"), x, y + 32);
+};

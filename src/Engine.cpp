@@ -11,7 +11,7 @@ Engine::Engine()
 	idleRpm = 1000;
 
 	diffRatio = 3.42;
-	currentGear = 1;
+	currentGear = 6;
 	transmissionEff = 0.7;
 }
 

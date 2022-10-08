@@ -135,6 +135,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="src\helper.cpp" />
     <ClCompile Include="src\Engine.cpp" />
     <ClCompile Include="src\vehicle sim.cpp" />
     <ClCompile Include="src\Vehicle.cpp" />
@@ -142,6 +143,7 @@
   <ItemGroup>
     <ClInclude Include="headers\Engine.h" />
     <ClInclude Include="headers\Vehicle.h" />
+    <ClInclude Include="headers\helper.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

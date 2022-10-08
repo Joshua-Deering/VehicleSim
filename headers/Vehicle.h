@@ -1,5 +1,11 @@
 #pragma once
 #include "../headers/Engine.h"
+#include "../headers/helper.h"
+#include <SDL.h>
+#include <SDL_ttf.h>
+#include <map>
+#include <variant>
+
 class Vehicle
 {
 public:
@@ -18,7 +24,7 @@ public:
 	double cgDistBack;
 	double cgHeight;
 
-	int mass;
+	double mass;
 	//load on the front and back suspension/tires
 	double loadFront;
 	double loadBack;
@@ -31,4 +37,5 @@ public:
 	Vehicle(double drag, double rollingResistance, int mass);
 	double calcAcceleration();
 	void tick(double dTime);
+	void showStats(SDL_Renderer *renderer, TTF_Font *font, int x, int y);
 };
