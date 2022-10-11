@@ -25,5 +25,6 @@ public:
 	double getTorque(double throttle);
 	double getHp(double throttle);
 	double getRpm(double wheelSpeed);
+	int shift();
 };
 

@@ -3,15 +3,15 @@
 Engine::Engine()
 : gearRatios{ 2.90, 2.66, 1.78, 1.30, 1, 0.74, 0.50 }
 {
-	torquePeak = 475;
-	peakRpm = 4250;
-	torqueRedline = 400;
+	torquePeak = 600;
+	peakRpm = 4500;
+	torqueRedline = 500;
 	redLineRpm = 6000;
 	torqueIdle = 400;
 	idleRpm = 1000;
 
 	diffRatio = 3.42;
-	currentGear = 6;
+	currentGear = 1;
 	transmissionEff = 0.7;
 }
 
@@ -34,6 +34,16 @@ double Engine::getHp(double throttle) {
 
 double Engine::getRpm(double wheelSpeed) {
 	currentRpm = wheelSpeed * gearRatios[currentGear] * diffRatio * 60 / (2 * M_PI);
+	shift();
 	currentRpm = std::clamp(currentRpm, 1000, 6000);
 	return currentRpm;
+}
+
+int Engine::shift() {
+	if (currentRpm > 5200)
+		currentGear++;
+	else if (currentRpm < 3000)
+		currentGear--;
+	currentGear = std::clamp(currentGear, 1, 6);
+	return currentGear;
 }

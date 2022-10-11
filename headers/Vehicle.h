@@ -3,8 +3,6 @@
 #include "../headers/helper.h"
 #include <SDL.h>
 #include <SDL_ttf.h>
-#include <map>
-#include <variant>
 
 class Vehicle
 {
@@ -36,6 +34,6 @@ public:
 
 	Vehicle(double drag, double rollingResistance, int mass);
 	double calcAcceleration();
-	void tick(double dTime);
+	void tick(Uint64 dTime);
 	void showStats(SDL_Renderer *renderer, TTF_Font *font, int x, int y);
 };

@@ -10,50 +10,52 @@
 typedef std::chrono::high_resolution_clock Clock;
 
 void initWindow();
+bool tick(Uint64 d);
 
 SDL_Window* window;
 SDL_Renderer* renderer;
 TTF_Font* font;
+Vehicle car = Vehicle(0.29, 8.7, 1472);
 int main(int argc, char* argv[])
 {
     initWindow();
 
-    Vehicle car = Vehicle(0.29, 8.7, 1472);
-
-    float timePerTick = 1.f / 60.f;
-    float accumulator = 0.f;
-
-    auto lastTime = Clock::now();
-
     bool quit = false;
-    SDL_Event ev;
+
+    Uint64 lastTime = SDL_GetTicks64();
+    Uint64 dTime;
 
     while (!quit) {
-        SDL_PumpEvents();
-        
-
-        accumulator += std::chrono::duration_cast<std::chrono::nanoseconds>(Clock::now() - lastTime).count();
-        lastTime = Clock::now();
-
-        while (accumulator >= timePerTick)
-        {
-            accumulator -= timePerTick;
-            car.tick(timePerTick);
-
-            SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
-            SDL_RenderClear(renderer);
-
-            car.showStats(renderer, font, 10, 10);
-
-            SDL_RenderPresent(renderer);
-            
-        }
-        //std::this_thread::sleep_for(std::chrono::milliseconds(10));
+        dTime = SDL_GetTicks64() - lastTime;
+        quit = tick(dTime);
+        //the loop will run a max of (1000/10) times per second, but can run at any speed below that
+        lastTime = SDL_GetTicks64();
+        SDL_Delay(10);
     }
 
     SDL_DestroyWindow(window);
     SDL_Quit();
+    TTF_Quit();
+
     return 0;
+}
+
+bool tick(Uint64 d) {
+    SDL_Event ev;
+    SDL_PumpEvents();
+    while (SDL_PollEvent(&ev) != 0) {
+        if (ev.type == SDL_QUIT)
+            return true;
+    }
+
+    car.tick(d);
+
+    SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
+    SDL_RenderClear(renderer);
+
+    car.showStats(renderer, font, 10, 10);
+
+    SDL_RenderPresent(renderer);
 }
 
 void initWindow() {
@@ -68,6 +70,6 @@ void initWindow() {
         return;
     }
     renderer = SDL_CreateRenderer(window, -1, 0);
-    font = TTF_OpenFont("Claster Oleander.ttf", 15);
+    font = TTF_OpenFont("OpenSans-Regular.ttf", 25);
     
 }
