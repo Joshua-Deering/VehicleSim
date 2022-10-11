@@ -72,7 +72,7 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <IncludePath>C:\Users\Josh\Desktop\Code Stuff\cpp\vehicle sim\SDL2_ttf\include;C:\Users\Josh\Desktop\Code Stuff\cpp\vehicle sim\SDL2\include;$(IncludePath)</IncludePath>
-    <LibraryPath>C:\Users\Josh\Desktop\Code Stuff\cpp\vehicle sim\SDL2_ttf\lib\x64;C:\Users\Josh\Desktop\Code Stuff\cpp\vehicle sim\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
+    <LibraryPath>C:\Users\Josh\Desktop\SDL2_ttf\lib\x64;C:\Users\Josh\Desktop\SDL2\lib\x64;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -114,7 +114,7 @@
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Users\Josh\Desktop\SDL2\lib\x64;C:\Users\Josh\Desktop\SDL2_ttf\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Users\Josh\Desktop\SDL2_ttf\lib\x64;C:\Users\Josh\Desktop\SDL2\lib\x64;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
