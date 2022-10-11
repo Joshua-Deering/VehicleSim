@@ -22,7 +22,7 @@ Vehicle::Vehicle(double _drag, double _rr, int _mass) {
 
 double Vehicle::calcAcceleration() {
 	double traction = enginePower;
-	double d = drag * (speed * (speed/2));
+	double d = drag * (speed * speed);
 	double r = rr * speed;
 
 	return (traction - d - r) / mass;
@@ -31,7 +31,7 @@ double Vehicle::calcAcceleration() {
 void Vehicle::tick(Uint64 dTime) {
 	wheelSpeed = speed / wheelRadius;
 	engine.getRpm(wheelSpeed);
-	enginePower = engine.getTorque(1);
+	enginePower = engine.getTorque(1) / wheelRadius;
 
 	acceleration = calcAcceleration();
 	speed += acceleration * (dTime/100.0);
@@ -40,29 +40,6 @@ void Vehicle::tick(Uint64 dTime) {
 	loadFront = (cgDistBack / length) * mass - (cgHeight / length) * (mass * acceleration);
 	loadBack = (cgDistFront / length) * mass + (cgHeight / length) * (mass * acceleration);
 }
-
-/*
-double drag;
-	double rr;
-	double enginePower;
-
-	double position;
-	double speed;
-	double acceleration;
-
-	double length;
-
-	double cgDistFront;
-	double cgDistBack;
-	double cgHeight;
-
-	int mass;
-	double loadFront;
-	double loadBack;
-
-	double wheelRadius;
-	double wheelSpeed;
-*/
 
 void Vehicle::showStats(SDL_Renderer *renderer, TTF_Font *font, int x, int y)
 {
@@ -76,6 +53,7 @@ void Vehicle::showStats(SDL_Renderer *renderer, TTF_Font *font, int x, int y)
 	strings.push_back(std::string("Load on rear wheels: ") + helper::formatString(loadBack, "kg"));
 	strings.push_back(std::string("Wheel speed: ") + helper::formatString(wheelSpeed / 60, "rpm"));
 	strings.push_back(std::string("Engine rpm: ") + helper::formatString(engine.currentRpm, "rpm"));
+	strings.push_back(std::string("Torque: ") + helper::formatString(engine.currentTorque, "nm"));
 	strings.push_back(std::string("Gear ") + std::to_string(engine.currentGear));
 	helper::renderStackedText(renderer, font, color, strings, x, y, 1);
 };
